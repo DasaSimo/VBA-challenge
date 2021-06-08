@@ -1,2 +1,2 @@
-# VBA_challenge
+# VBA-challenge
 VBA Scripts
