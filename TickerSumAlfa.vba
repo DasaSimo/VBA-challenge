@@ -1,4 +1,3 @@
-Attribute VB_Name = "TickerSumAlfa"
 Sub Ticker():
 
     Dim Ticker As String
@@ -30,10 +29,11 @@ Sub Ticker():
             Closing_price = Cells(R - 1, 6).Value
             Cells(SumR, 10).Value = Ticker
             Cells(SumR, 11).Value = Closing_price - Opening_price
-            If Cells(SumR, 11).Value = 0 Then
+            ' avoid division by zero
+            If Opening_price = 0 Then
                 Cells(SumR, 12).Value = "0.00%"
             Else
-                Cells(SumR, 12).Value = Round((Opening_price / Cells(SumR, 11).Value), 2) & "%"
+                Cells(SumR, 12).Value = Round((Cells(SumR, 11).Value / Opening_price) * 100, 2) & "%"
             End If
             Cells(SumR, 13).Value = Total_St_Vol
             SumR = SumR + 1
@@ -43,16 +43,25 @@ Sub Ticker():
             Opening_price = Cells(R, 3).Value
             Total_St_Vol = Cells(R, 7).Value
          End If
-         
+         ' next Row
          R = R + 1
          
     Loop
+    
+    ' last group
     Closing_price = Cells(R - 1, 6).Value
     Cells(SumR, 10).Value = Ticker
     Cells(SumR, 11).Value = Closing_price - Opening_price
-    Cells(SumR, 12).Value = Round((Opening_price / Cells(SumR, 11).Value), 2) & "%"
+    ' avoid division by zero
+    If Opening_price = 0 Then
+        Cells(SumR, 12).Value = "0.00%"
+    Else
+        Cells(SumR, 12).Value = Round((Cells(SumR, 11).Value / Opening_price) * 100, 2) & "%"
+    End If
     Cells(SumR, 13).Value = Total_St_Vol
     
     MsgBox "All done! Tickers Processed " & SumR
         
 End Sub
+
+
