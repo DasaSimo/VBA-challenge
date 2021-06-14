@@ -99,6 +99,6 @@ Sub Ticker():
 		
 		 
 		ws.Columns("J:R").AutoFit
-	End With
+	Next ws
     
 End Sub
