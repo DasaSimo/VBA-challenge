@@ -22,6 +22,9 @@ Sub Ticker():
 		ws.Range("M1").Value = "Total Stock Volume"
 		
 		SumR = 1
+                Max_Pct = 0
+                Min_Pct = 0
+                Max_Total = 0		
 		
 		Opening_price = ws.Cells(2, 3).Value
 				
